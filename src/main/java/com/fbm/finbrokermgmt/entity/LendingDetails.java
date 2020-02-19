@@ -1,7 +1,6 @@
 package com.fbm.finbrokermgmt.entity;
 
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 import javax.persistence.Basic;
 import javax.persistence.Entity;
@@ -23,23 +22,25 @@ public class LendingDetails {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private long recordId;
 	
-	/*
+	
 	@ManyToOne
-	@JoinColumn(name = "userId", foreignKey = @ForeignKey(name="lender_fkey"))
+	@JoinColumn(name = "lender_id", foreignKey = @ForeignKey(name="lender_fkey"))
 	private UserDetails lender;
 	
 	@ManyToOne
-	@JoinColumn(name = "userId", foreignKey = @ForeignKey(name="borrower_fkey"))
+	@JoinColumn(name = "borrower_id", foreignKey = @ForeignKey(name="borrower_fkey"))
 	private UserDetails borrower;
-	*/
 	
+	
+	
+	/*
 	@ManyToOne
 	@JoinColumns({
 		@JoinColumn(name = "lenderId", foreignKey = @ForeignKey(name="lender_fkey")),
 		@JoinColumn(name = "borrowerId", foreignKey = @ForeignKey(name="borrower_fkey"))
 	})
 	private UserDetails user;
-	
+	*/
 	@ManyToOne
 	@JoinColumn(name = "brokerId", foreignKey = @ForeignKey(name="broker_fkey"))
 	private BrokerDetails broker;
@@ -68,14 +69,6 @@ public class LendingDetails {
 
 	public void setRecordId(long recordId) {
 		this.recordId = recordId;
-	}
-
-	public UserDetails getUser() {
-		return user;
-	}
-
-	public void setUser(UserDetails user) {
-		this.user = user;
 	}
 
 	public BrokerDetails getBroker() {
