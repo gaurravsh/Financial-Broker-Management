@@ -12,6 +12,12 @@ public class BrokerDetails {
 	private long brokerId;
 	
 	private String brokerName;
+	
+	public BrokerDetails(String brokerName) {
+		this.brokerName=brokerName;
+	}
+	
+	public BrokerDetails() {}
 
 	public long getBrokerId() {
 		return brokerId;
