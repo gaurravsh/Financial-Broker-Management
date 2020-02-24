@@ -1,5 +1,6 @@
 package com.fbm.finbrokermgmt.bean;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +11,8 @@ import com.fbm.finbrokermgmt.dao.BrokerRepository;
 import com.fbm.finbrokermgmt.dao.LendingRepo;
 import com.fbm.finbrokermgmt.dao.UserRepository;
 import com.fbm.finbrokermgmt.entity.BrokerDetails;
+import com.fbm.finbrokermgmt.entity.UserDetails;
+import com.fbm.finbrokermgmt.security.IAuthenticationFacade;
 
 @Service
 public class FinBrokerService {
@@ -22,6 +25,8 @@ public class FinBrokerService {
 	@Autowired
 	LendingRepo lendingRepo;
 	
+	@Autowired
+    private IAuthenticationFacade authenticationFacade;
 	
 	/**Broker Table Related Functions. */
 	public BrokerDetails addBroker(String brokerName) {
@@ -38,8 +43,13 @@ public class FinBrokerService {
 	
 	
 	/**User Table Related Functions. */
-	public void addUser(Map<String, String[]> userMap) {
-		
+	public UserDetails addUser(String userName) {
+		String brokerId = ((Principal)authenticationFacade.getAuthentication().getPrincipal()).getName();
+		BrokerDetails broker = brokerRepo.findOne(Long.parseLong(brokerId));
+		UserDetails user = new UserDetails();
+		user.setBroker(broker);
+		user.setUserName(userName);
+		return userRepo.save(user);
 	}
 
 	

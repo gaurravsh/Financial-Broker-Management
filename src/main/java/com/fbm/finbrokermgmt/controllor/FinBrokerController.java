@@ -14,12 +14,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fbm.finbrokermgmt.bean.FinBrokerService;
 import com.fbm.finbrokermgmt.entity.BrokerDetails;
+import com.fbm.finbrokermgmt.entity.UserDetails;
 
 @Controller
 public class FinBrokerController {
 
 	@Autowired
-	FinBrokerService service;
+	FinBrokerService brokerService;
 	
 	/** Login and other common functions. */
 	@RequestMapping(value = { "", "/login", "/index" })
@@ -49,19 +50,19 @@ public class FinBrokerController {
 	@RequestMapping("/addBroker")
 	@ResponseBody
 	public BrokerDetails addBroker(@RequestParam(name="brokerName",required = true) String brokerName) {
-		return service.addBroker(brokerName);
+		return brokerService.addBroker(brokerName);
 	}
 	
 	@RequestMapping("/deleteBroker")
 	@ResponseBody
 	public void deleteBroker(@RequestParam(name="brokerId",required = true) String brokerId){
-		service.deleteBroker(brokerId);
+		brokerService.deleteBroker(brokerId);
 	}
 	
 	@RequestMapping("/showBrokers")
 	@ResponseBody
 	public Collection<BrokerDetails> showAllBrokers(){
-		return service.getAllBrokers();
+		return brokerService.getAllBrokers();
 	}
 	
 	
@@ -69,16 +70,14 @@ public class FinBrokerController {
 	
 	/** Broker controlled functions. */
 	@RequestMapping("/addUser")
-	public BrokerDetails addUser(HttpServletRequest request) {
-		Map<String, String[]> userMap = request.getParameterMap();
-		service.addUser(userMap);
-		return null;
+	public UserDetails addUser(@RequestParam(name="userName",required = true) String userName) {
+		return brokerService.addUser(userName);
 	}
 
 	@RequestMapping("/addDeal")
 	public String addDeal(HttpServletRequest request) {
 		Map<String, String[]> dealMap = request.getParameterMap();
-		service.addDeal(dealMap);
+		brokerService.addDeal(dealMap);
 		return null;
 	}
 
