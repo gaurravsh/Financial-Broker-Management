@@ -10,7 +10,7 @@ public class BrokerDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private long brokerId;
-	
+
 	private String brokerName;
 	
 	public BrokerDetails(String brokerName) {

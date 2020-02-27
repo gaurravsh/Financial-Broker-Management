@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.fbm.finbrokermgmt.entity.UserDetails;
 
 @Repository
-public interface UserRepository extends JpaRepository<UserDetails, Long> {
+public interface UserRepo extends JpaRepository<UserDetails, Long> {
 	
 }

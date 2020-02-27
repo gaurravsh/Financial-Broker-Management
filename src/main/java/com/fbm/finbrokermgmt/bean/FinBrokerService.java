@@ -7,9 +7,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fbm.finbrokermgmt.dao.BrokerRepository;
+import com.fbm.finbrokermgmt.dao.BrokerRepo;
 import com.fbm.finbrokermgmt.dao.LendingRepo;
-import com.fbm.finbrokermgmt.dao.UserRepository;
+import com.fbm.finbrokermgmt.dao.UserRepo;
 import com.fbm.finbrokermgmt.entity.BrokerDetails;
 import com.fbm.finbrokermgmt.entity.UserDetails;
 import com.fbm.finbrokermgmt.security.IAuthenticationFacade;
@@ -17,10 +17,10 @@ import com.fbm.finbrokermgmt.security.IAuthenticationFacade;
 @Service
 public class FinBrokerService {
 	@Autowired
-	BrokerRepository brokerRepo;
+	BrokerRepo brokerRepo;
 	
 	@Autowired
-	UserRepository userRepo;
+	UserRepo userRepo;
 	
 	@Autowired
 	LendingRepo lendingRepo;

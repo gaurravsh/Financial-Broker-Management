@@ -11,7 +11,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.fbm.finbrokermgmt.dao.BrokerRepository;
+import com.fbm.finbrokermgmt.dao.BrokerRepo;
 import com.fbm.finbrokermgmt.entity.BrokerDetails;
 
 @RunWith(SpringRunner.class)
@@ -21,7 +21,7 @@ public class BrokerRepoTest {
 	TestEntityManager entityManager;
 	
 	@Autowired
-	private BrokerRepository repo;
+	private BrokerRepo repo;
 	
 	private static final String brokerName="Rajan Soni";
 	

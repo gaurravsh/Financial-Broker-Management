@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,8 +24,8 @@ public class FinBrokerController {
 	FinBrokerService brokerService;
 	
 	/** Login and other common functions. */
-	@RequestMapping(value = { "", "/login", "/index" })
-	public String login(HttpServletRequest request) {
+	@GetMapping(value = { "", "/login", "/index" })
+	public String loginPage() {
 		return "index";
 	}
 	
@@ -38,6 +39,8 @@ public class FinBrokerController {
 			return "index";
 		}
 	}
+	
+	
 	
 	@PostMapping("/showSummary")
 	public String showSummary(HttpServletRequest request) {

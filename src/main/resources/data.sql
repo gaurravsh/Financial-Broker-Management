@@ -17,3 +17,12 @@ CREATE TABLE userdetails (
 );
 
 --insert into userdetails (userid, brokerid, username) values(1,1,'User1');
+
+DROP TABLE IF EXISTS credentialdetails;
+
+CREATE TABLE credentialdetails (
+	credentialid INT AUTO_INCREMENT  PRIMARY KEY,  
+  	username VARCHAR(250) NOT NULL,
+  	password VARCHAR(250) NOT NULL,
+  	role VARCHAR(250) NOT NULL
+);
