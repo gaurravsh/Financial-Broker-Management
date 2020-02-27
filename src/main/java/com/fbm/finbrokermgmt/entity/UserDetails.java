@@ -22,6 +22,14 @@ public class UserDetails {
 	@JoinColumn(name = "brokerId", foreignKey = @ForeignKey(name="broker_fkey"))
 	private BrokerDetails broker;
 
+	public BrokerDetails getBroker() {
+		return broker;
+	}
+
+	public void setBroker(BrokerDetails broker) {
+		this.broker = broker;
+	}
+
 	public long getUserId() {
 		return userId;
 	}
