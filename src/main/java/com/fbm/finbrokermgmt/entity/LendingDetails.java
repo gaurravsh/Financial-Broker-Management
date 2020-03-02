@@ -9,14 +9,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.Formula;
 
 @Entity
+@Table(name="lendingdetails")
 public class LendingDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -42,7 +43,7 @@ public class LendingDetails {
 	private UserDetails user;
 	*/
 	@ManyToOne
-	@JoinColumn(name = "brokerId", foreignKey = @ForeignKey(name="broker_fkey"))
+	@JoinColumn(name = "broker_id", foreignKey = @ForeignKey(name="broker_fkey"))
 	private BrokerDetails broker;
 	
 	private double rate;
@@ -56,6 +57,10 @@ public class LendingDetails {
 	@Basic
 	@Temporal(TemporalType.DATE)
 	private Date endDate;
+	
+	@Basic
+	@Temporal(TemporalType.DATE)
+	private Date bookingDate;
 	
 	@Formula(value =  "TimeUnit.DAYS.convert(endDate.getTime()-startDate.getTime(), TimeUnit.MILLISECONDS)")
 	private long durationInDays;

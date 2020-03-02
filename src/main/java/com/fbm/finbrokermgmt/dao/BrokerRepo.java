@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.fbm.finbrokermgmt.entity.BrokerDetails;
 
 @Repository
-public interface BrokerRepo extends JpaRepository<BrokerDetails, Long> {
-
+public interface BrokerRepo extends JpaRepository<BrokerDetails, Long>{
+	public BrokerDetails findByBrokerId(String brokerId);
 }

@@ -1,6 +1,7 @@
 package com.fbm.finbrokermgmt.controllor;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fbm.finbrokermgmt.bean.FinBrokerService;
 import com.fbm.finbrokermgmt.entity.BrokerDetails;
 import com.fbm.finbrokermgmt.entity.UserDetails;
+import com.fbm.finbrokermgmt.exception.FinBrokerException;
 
 @Controller
 public class FinBrokerController {
@@ -29,17 +31,6 @@ public class FinBrokerController {
 		return "index";
 	}
 	
-	@RequestMapping("/validate")
-	public String validation(HttpServletRequest request) {
-		String id = request.getParameter("userId");
-		String password = request.getParameter("password");
-		if (id.equals(password)) {
-			return "success";
-		} else {
-			return "index";
-		}
-	}
-	
 	
 	
 	@PostMapping("/showSummary")
@@ -50,10 +41,15 @@ public class FinBrokerController {
 	
 	
 	/** Admin - controlled functions. */
-	@RequestMapping("/addBroker")
+	@GetMapping("/addBroker")
+	public String addBrokerPage() {
+		return "addBroker";
+	}
+	
+	@PostMapping("/addBroker")
 	@ResponseBody
-	public BrokerDetails addBroker(@RequestParam(name="brokerName",required = true) String brokerName) {
-		return brokerService.addBroker(brokerName);
+	public BrokerDetails addBroker(@RequestParam(name="brokerName",required = true) String brokerName, @RequestParam(name="brokerId",required = true)String brokerId) throws FinBrokerException {
+		return brokerService.addBroker(brokerId,brokerName);
 	}
 	
 	@RequestMapping("/deleteBroker")
@@ -62,7 +58,7 @@ public class FinBrokerController {
 		brokerService.deleteBroker(brokerId);
 	}
 	
-	@RequestMapping("/showBrokers")
+	@GetMapping("/showBrokers")
 	@ResponseBody
 	public Collection<BrokerDetails> showAllBrokers(){
 		return brokerService.getAllBrokers();
@@ -72,9 +68,19 @@ public class FinBrokerController {
 	
 	
 	/** Broker controlled functions. */
-	@RequestMapping("/addUser")
-	public UserDetails addUser(@RequestParam(name="userName",required = true) String userName) {
-		return brokerService.addUser(userName);
+	@GetMapping("/addUser")
+	public String addUserPage() {
+		return "addUser";
+	}
+	
+	@PostMapping("/addUser")
+	public UserDetails addUser(@RequestParam(name="userName",required = true) String userName,@RequestParam(name="userId",required = true) String userId) {
+		return brokerService.addUser(userId,userName);
+	}
+	
+	@RequestMapping("/showUsers")
+	public List<UserDetails> showUsers() throws FinBrokerException {
+		return brokerService.showUsers();
 	}
 
 	@RequestMapping("/addDeal")

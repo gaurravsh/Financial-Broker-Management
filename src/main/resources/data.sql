@@ -1,22 +1,36 @@
 DROP TABLE IF EXISTS brokerdetails;
 
 CREATE TABLE brokerdetails (
-  brokerid INT AUTO_INCREMENT  PRIMARY KEY,
-  brokername VARCHAR(250) NOT NULL
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  brokerId VARCHAR(250) UNIQUE NOT NULL,
+  brokerName VARCHAR(250) NOT NULL
 );
 
---insert into brokerdetails ( brokerid, brokername) values(1,'Broker1');
+insert into brokerdetails (id,brokerid, brokername) values(1,'sampat','Sampat Sharma');
 
 DROP TABLE IF EXISTS userdetails;
 
 CREATE TABLE userdetails (
-	userid INT AUTO_INCREMENT  PRIMARY KEY,  
-	brokerid INT NOT NULL,
+	id INT AUTO_INCREMENT PRIMARY KEY,  
+	brokerid VARCHAR(250) NOT NULL,
+	userid VARCHAR(250) UNIQUE NOT NULL, 
   	username VARCHAR(250) NOT NULL,
   	FOREIGN KEY (brokerid) REFERENCES brokerdetails(brokerid)
 );
 
 --insert into userdetails (userid, brokerid, username) values(1,1,'User1');
+
+DROP TABLE IF EXISTS lendingdetails;
+
+CREATE TABLE lendingdetails (
+	recordid INT AUTO_INCREMENT  PRIMARY KEY,  
+	lender_id INT NOT NULL,
+	borrower_id INT NOT NULL,
+	broker_id INT NOT NULL,
+  	rate INT not null,
+  	amount INT not null,
+  	FOREIGN KEY (broker_id) REFERENCES brokerdetails(brokerid)
+);
 
 DROP TABLE IF EXISTS credentialdetails;
 
