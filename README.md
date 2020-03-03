@@ -2,6 +2,13 @@
 
 This is a self learning project, build mainly upon Spring Boot.
 
+**Learning Objectives** :
+
+1. Write well designed *REST APIs*.
+2. Learn and implement JPA. Don't use a lot of hibernate, because hibernate is just a wrapper around JPA. JPA is forever.
+3. Start by using *h2* as database, and then promote to some external RDBMS.
+4. Implement spring security, starting by simple password based authentication to more secure LDAP and OAuth based authentication.
+
 **Business Scenario** :
 * There are people who have excess of money and can lend money to others to earn some interst, called *lenders*.
 * There are people who need money and are searching for *lenders*, called *borrowers*.
