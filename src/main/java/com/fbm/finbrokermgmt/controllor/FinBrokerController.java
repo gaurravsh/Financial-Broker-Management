@@ -24,63 +24,65 @@ public class FinBrokerController {
 
 	@Autowired
 	FinBrokerService brokerService;
-	
+
 	/** Login and other common functions. */
 	@GetMapping(value = { "", "/login", "/index" })
 	public String loginPage() {
 		return "index";
 	}
-	
-	
-	
+
 	@PostMapping("/showSummary")
 	public String showSummary(HttpServletRequest request) {
 		return null;
 	}
-	
-	
-	
+
 	/** Admin - controlled functions. */
 	@GetMapping("/addBroker")
 	public String addBrokerPage() {
 		return "addBroker";
 	}
-	
+
 	@PostMapping("/addBroker")
 	@ResponseBody
-	public BrokerDetails addBroker(@RequestParam(name="brokerName",required = true) String brokerName, @RequestParam(name="brokerId",required = true)String brokerId) throws FinBrokerException {
-		return brokerService.addBroker(brokerId,brokerName);
+	public BrokerDetails addBroker(@RequestParam(name = "brokerName", required = true) String brokerName,
+			@RequestParam(name = "brokerId", required = true) String brokerId) throws FinBrokerException {
+		return brokerService.addBroker(brokerId, brokerName);
 	}
-	
+
 	@RequestMapping("/deleteBroker")
 	@ResponseBody
-	public void deleteBroker(@RequestParam(name="brokerId",required = true) String brokerId){
+	public void deleteBroker(@RequestParam(name = "brokerId", required = true) String brokerId) {
 		brokerService.deleteBroker(brokerId);
 	}
-	
+
 	@GetMapping("/showBrokers")
 	@ResponseBody
-	public Collection<BrokerDetails> showAllBrokers(){
+	public Collection<BrokerDetails> showAllBrokers() {
 		return brokerService.getAllBrokers();
 	}
-	
-	
-	
-	
+
 	/** Broker controlled functions. */
 	@GetMapping("/addUser")
 	public String addUserPage() {
 		return "addUser";
 	}
-	
+
 	@PostMapping("/addUser")
-	public UserDetails addUser(@RequestParam(name="userName",required = true) String userName,@RequestParam(name="userId",required = true) String userId) {
-		return brokerService.addUser(userId,userName);
+	public UserDetails addUser(@RequestParam(name = "userName", required = true) String userName,
+			@RequestParam(name = "userId", required = true) String userId) throws FinBrokerException {
+		return brokerService.addUser(userId, userName);
 	}
-	
+
 	@RequestMapping("/showUsers")
+	@ResponseBody
 	public List<UserDetails> showUsers() throws FinBrokerException {
 		return brokerService.showUsers();
+	}
+
+	@RequestMapping("/getUser")
+	@ResponseBody
+	public List<UserDetails> getUser(@RequestParam(name = "userId", required = true) String userId) {
+		return brokerService.getUser(userId);
 	}
 
 	@RequestMapping("/addDeal")
@@ -90,7 +92,4 @@ public class FinBrokerController {
 		return null;
 	}
 
-	
-
-	
 }

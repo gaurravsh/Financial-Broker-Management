@@ -1,23 +1,24 @@
 package com.fbm.finbrokermgmt.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.NaturalId;
 
 @Entity
 @Table(name="brokerdetails")
-public class BrokerDetails {
+public class BrokerDetails implements Serializable{
+
+	private static final long serialVersionUID = 5128156072309668461L;
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@SequenceGenerator(initialValue = 1,name = "broker_id_seq")
 	@Column(name = "id")
 	private long id;
 
-	@NaturalId
 	@Column(name="brokerId",unique = true,nullable=false)
 	private String brokerId;
 	
