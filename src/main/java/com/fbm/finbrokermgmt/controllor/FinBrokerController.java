@@ -1,14 +1,19 @@
 package com.fbm.finbrokermgmt.controllor;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,7 +21,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fbm.finbrokermgmt.bean.FinBrokerService;
 import com.fbm.finbrokermgmt.entity.BrokerDetails;
+import com.fbm.finbrokermgmt.entity.LendingDetails;
 import com.fbm.finbrokermgmt.entity.UserDetails;
+import com.fbm.finbrokermgmt.entity.UserIdAndName;
 import com.fbm.finbrokermgmt.exception.FinBrokerException;
 
 @Controller
@@ -25,14 +32,24 @@ public class FinBrokerController {
 	@Autowired
 	FinBrokerService brokerService;
 
+	@InitBinder
+	public void bindDate(WebDataBinder binder) {
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		CustomDateEditor editor = new CustomDateEditor(format, false);
+		binder.registerCustomEditor(Date.class, editor);
+	}
+	
+	
 	/** Login and other common functions. */
 	@GetMapping(value = { "", "/login", "/index" })
 	public String loginPage() {
+		//TODO : do the authentication with custom page.
 		return "index";
 	}
 
 	@PostMapping("/showSummary")
 	public String showSummary(HttpServletRequest request) {
+		//TODO
 		return null;
 	}
 
@@ -52,6 +69,7 @@ public class FinBrokerController {
 	@RequestMapping("/deleteBroker")
 	@ResponseBody
 	public void deleteBroker(@RequestParam(name = "brokerId", required = true) String brokerId) {
+		//TODO
 		brokerService.deleteBroker(brokerId);
 	}
 
@@ -73,23 +91,26 @@ public class FinBrokerController {
 		return brokerService.addUser(userId, userName);
 	}
 
-	@RequestMapping("/showUsers")
+	@RequestMapping("/showMyUsers")
 	@ResponseBody
-	public List<UserDetails> showUsers() throws FinBrokerException {
+	public List<UserIdAndName> showUsers() throws FinBrokerException {
 		return brokerService.showUsers();
 	}
 
-	@RequestMapping("/getUser")
-	@ResponseBody
-	public List<UserDetails> getUser(@RequestParam(name = "userId", required = true) String userId) {
-		return brokerService.getUser(userId);
+	@GetMapping("/addDeal")
+	public String addDealpage() {
+		return "addDeal";
 	}
 
-	@RequestMapping("/addDeal")
-	public String addDeal(HttpServletRequest request) {
-		Map<String, String[]> dealMap = request.getParameterMap();
-		brokerService.addDeal(dealMap);
-		return null;
+	@PostMapping("/addDeal")
+	public LendingDetails addDealPost(@RequestParam(name = "borrowerId") String borrowerId,
+			@RequestParam(name = "lenderId") String lenderId,
+			@RequestParam(name="rate")double rate,
+			@RequestParam(name="amount")long amount,
+			@RequestParam(name="startDate") Date startDate,
+			@RequestParam(name="endDate") Date endDate) throws FinBrokerException {
+		brokerService.addDeal(borrowerId, lenderId, rate, amount, startDate, endDate);
+		return brokerService.addDeal(borrowerId, lenderId, rate, amount, startDate, endDate);
 	}
 
 }

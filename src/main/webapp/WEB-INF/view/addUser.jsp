@@ -11,11 +11,11 @@
 		<table>
 			<tr>
 				<td>User Id</td>
-				<td><input type="text" name="userId"></td>
+				<td><input type="text" name="userId" required="required"></td>
 			</tr>
 			<tr>
 				<td>User Name</td>
-				<td><input type="text" name="userName"></td>
+				<td><input type="text" name="userName" required="required"></td>
 			</tr>
 		</table>
 		<input type="submit" value="Submit">

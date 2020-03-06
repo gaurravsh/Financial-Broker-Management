@@ -18,18 +18,27 @@ CREATE TABLE userdetails (
   	FOREIGN KEY (brokerid) REFERENCES brokerdetails(brokerid)
 );
 
---insert into userdetails (userid, brokerid, username) values(1,1,'User1');
+insert into userdetails (id,userid, brokerid, username) values(1,'gopi','sampat','Gopi');
+insert into userdetails (id,userid, brokerid, username) values(2,'soni','sampat','Soni');
 
 DROP TABLE IF EXISTS lendingdetails;
 
 CREATE TABLE lendingdetails (
 	recordid INT AUTO_INCREMENT  PRIMARY KEY,  
-	lender_id INT NOT NULL,
-	borrower_id INT NOT NULL,
-	broker_id INT NOT NULL,
-  	rate INT not null,
+	lender_id VARCHAR(250) NOT NULL,
+	borrower_id VARCHAR(250) NOT NULL,
+	broker_id VARCHAR(250) NOT NULL,
+  	rate float not null,
   	amount INT not null,
-  	FOREIGN KEY (broker_id) REFERENCES brokerdetails(brokerid)
+  	start_date DATE not null,
+  	end_date date not null,
+  	booking_date date not null,
+  	duration int not null,
+  	final_amount float not null,
+  	FOREIGN KEY (broker_id) REFERENCES brokerdetails(brokerid),
+  	FOREIGN KEY (lender_id) REFERENCES userdetails(userid),
+  	FOREIGN KEY (borrower_id) REFERENCES userdetails(userid),
+  	
 );
 
 DROP TABLE IF EXISTS credentialdetails;

@@ -11,11 +11,11 @@
 		<table>
 			<tr>
 				<td>Broker Id</td>
-				<td><input type="text" name="brokerId"></td>
+				<td><input type="text" name="brokerId" required="required"></td>
 			</tr>
 			<tr>
 				<td>Broker Name</td>
-				<td><input type="text" name="brokerName"></td>
+				<td><input type="text" name="brokerName" required="required"></td>
 			</tr>
 		</table>
 		<input type="submit" value="Submit">

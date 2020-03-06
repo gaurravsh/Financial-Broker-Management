@@ -4,8 +4,9 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -15,7 +16,7 @@ public class BrokerDetails implements Serializable{
 	private static final long serialVersionUID = 5128156072309668461L;
 
 	@Id
-	@SequenceGenerator(initialValue = 1,name = "broker_id_seq")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name = "id")
 	private long id;
 

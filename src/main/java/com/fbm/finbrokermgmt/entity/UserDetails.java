@@ -4,17 +4,18 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "userdetails")
 public class UserDetails {
 	@Id
-	@SequenceGenerator(initialValue = 1,name = "user_id_seq")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name = "id")
 	private long id;
 
@@ -24,13 +25,11 @@ public class UserDetails {
 	@Column(name = "userName", nullable = false)
 	private String userName;
 
-	
-	@Column(name="brokerId",nullable=false,insertable  =false,updatable = false)
+	@Column(name="brokerId",nullable=false,insertable=false,updatable = false)
 	private String brokerId;
 	
-	
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "brokerId",referencedColumnName = "id",foreignKey = @ForeignKey)
+	@JoinColumn(name = "brokerId",referencedColumnName = "brokerId",foreignKey = @ForeignKey(name = "user-brokerid-fkey"))
 	private BrokerDetails broker;
 
 	public UserDetails() {}
@@ -67,13 +66,12 @@ public class UserDetails {
 		this.userName = userName;
 	}
 
-//	
-//	public String getBrokerId() {
-//		return brokerId;
-//	}
-//
-//	public void setBrokerId(String brokerId) {
-//		this.brokerId = brokerId;
-//	}
+	public String getBrokerId() {
+		return brokerId;
+	}
+
+	public void setBrokerId(String brokerId) {
+		this.brokerId = brokerId;
+	}
 	
 }
