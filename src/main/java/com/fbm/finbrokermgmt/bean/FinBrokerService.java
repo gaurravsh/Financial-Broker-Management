@@ -17,6 +17,7 @@ import com.fbm.finbrokermgmt.entity.BrokerDetails;
 import com.fbm.finbrokermgmt.entity.LendingDetails;
 import com.fbm.finbrokermgmt.entity.UserDetails;
 import com.fbm.finbrokermgmt.entity.UserIdAndName;
+import com.fbm.finbrokermgmt.entity.DealSummary;
 import com.fbm.finbrokermgmt.exception.FinBrokerException;
 
 @Service
@@ -93,8 +94,6 @@ public class FinBrokerService {
 		preAuthenticate();
 		String brokerId = SecurityContextHolder.getContext().getAuthentication().getName();
 		BrokerDetails broker = brokerRepo.findByBrokerId(brokerId);
-		System.out.println("broker = "+brokerId);
-		System.out.println("broker object : "+broker.toString());
 		LendingDetails deal = new LendingDetails();
 		if (lenderId.equals(borrowerId))
 			throw new FinBrokerException("Both lender and borrower are set as " + lenderId);
@@ -110,8 +109,14 @@ public class FinBrokerService {
 		deal.setEndDate(endDate);
 		long durationInDays = TimeUnit.DAYS.convert(endDate.getTime()-startDate.getTime(), TimeUnit.MILLISECONDS);
 		deal.setDurationInDays(durationInDays);
-		deal.setFinalAmount(amount*rate/100 * (durationInDays/365.0));
+		deal.setFinalAmount(amount*(1+rate/100 * (durationInDays/365.0)));
 		return lendingRepo.save(deal);
+	}
+
+	public List<DealSummary> getSummaryForBroker() {
+		preAuthenticate();
+		String brokerId = SecurityContextHolder.getContext().getAuthentication().getName();
+		return lendingRepo.findByBrokerId(brokerId);
 	}
 
 }

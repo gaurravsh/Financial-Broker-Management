@@ -6,11 +6,10 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -18,9 +17,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.fbm.finbrokermgmt.bean.FinBrokerService;
 import com.fbm.finbrokermgmt.entity.BrokerDetails;
+import com.fbm.finbrokermgmt.entity.DealSummary;
 import com.fbm.finbrokermgmt.entity.LendingDetails;
 import com.fbm.finbrokermgmt.entity.UserDetails;
 import com.fbm.finbrokermgmt.entity.UserIdAndName;
@@ -47,11 +48,7 @@ public class FinBrokerController {
 		return "index";
 	}
 
-	@PostMapping("/showSummary")
-	public String showSummary(HttpServletRequest request) {
-		//TODO
-		return null;
-	}
+
 
 	/** Admin - controlled functions. */
 	@GetMapping("/addBroker")
@@ -73,12 +70,13 @@ public class FinBrokerController {
 		brokerService.deleteBroker(brokerId);
 	}
 
-	@GetMapping("/showBrokers")
+	@GetMapping("/showAllBrokers")
 	@ResponseBody
 	public Collection<BrokerDetails> showAllBrokers() {
 		return brokerService.getAllBrokers();
 	}
 
+	
 	/** Broker controlled functions. */
 	@GetMapping("/addUser")
 	public String addUserPage() {
@@ -109,8 +107,15 @@ public class FinBrokerController {
 			@RequestParam(name="amount")long amount,
 			@RequestParam(name="startDate") Date startDate,
 			@RequestParam(name="endDate") Date endDate) throws FinBrokerException {
-		brokerService.addDeal(borrowerId, lenderId, rate, amount, startDate, endDate);
+		//brokerService.addDeal(borrowerId, lenderId, rate, amount, startDate, endDate);
 		return brokerService.addDeal(borrowerId, lenderId, rate, amount, startDate, endDate);
+	}
+	
+	@RequestMapping("/showAllDeals")
+	public ModelAndView showAllDeals() {
+		List<DealSummary> allDeals= brokerService.getSummaryForBroker();
+		ModelAndView view = new ModelAndView("showAllDetails");
+		return view.addObject("allDeals", allDeals);
 	}
 
 }

@@ -16,7 +16,7 @@ public class BrokerDetails implements Serializable{
 	private static final long serialVersionUID = 5128156072309668461L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private long id;
 

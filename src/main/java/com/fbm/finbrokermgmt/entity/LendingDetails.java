@@ -18,7 +18,7 @@ import javax.persistence.TemporalType;
 @Table(name = "lendingdetails")
 public class LendingDetails {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "recordid")
 	private long recordId;
 
@@ -27,44 +27,41 @@ public class LendingDetails {
 	@ManyToOne
 	@JoinColumn(name = "lender_id", referencedColumnName = "userId", foreignKey = @ForeignKey(name = "lender_fkey"))
 	private UserDetails lender;
-
+	
 	@Column(name = "borrower_id", nullable = false, insertable = false, updatable = false)
 	private String borrowerId;
 	@ManyToOne
-	@JoinColumn(name = "borrower_id", foreignKey = @ForeignKey(name = "borrower_fkey"))
+	@JoinColumn(name = "borrower_id", referencedColumnName = "userId", foreignKey = @ForeignKey(name = "borrower_fkey"))
 	private UserDetails borrower;
 
 	@Column(name = "broker_id", nullable = false, insertable = false, updatable = false)
 	private String brokerId;
 	@ManyToOne
-	@JoinColumn(name = "broker_id", foreignKey = @ForeignKey(name = "broker_fkey"))
+	@JoinColumn(name = "broker_id", referencedColumnName = "brokerId", foreignKey = @ForeignKey(name = "broker_fkey"))
 	private BrokerDetails broker;
 
-	@Column(name = "rate", nullable = false)
+	@Column(name = "rate", nullable = false,precision = 2)
 	private double rate;
 
 	@Column(name = "amount", nullable = false)
 	private long amount;
 
-	
 	@Temporal(TemporalType.DATE)
 	@Column(name = "start_date", nullable = false)
 	private Date startDate;
 
-	
 	@Temporal(TemporalType.DATE)
 	@Column(name = "end_date", nullable = false)
 	private Date endDate;
 
-	
 	@Temporal(TemporalType.DATE)
 	@Column(name = "booking_date", nullable = false)
 	private Date bookingDate;
 
-	@Column(name="duration",nullable=false)
+	@Column(name = "duration", nullable = false)
 	private long durationInDays;
 
-	@Column(name="final_amount",nullable=false)
+	@Column(name = "final_amount", nullable = false,precision = 2)
 	private double finalAmount;
 
 	public long getRecordId() {
