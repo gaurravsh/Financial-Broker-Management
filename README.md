@@ -1,6 +1,6 @@
 # Financial-Broker-Management
 
-This is a self learning project, build mainly upon Spring Boot.
+This is a self learning project, build mainly upon Spring Boot. Please refer to project [wiki](https://github.com/gaurravsh/Financial-Broker-Management/wiki) for more details.
 
 **Learning Objectives** :
 
