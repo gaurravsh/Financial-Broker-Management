@@ -1,5 +1,7 @@
 package com.fbm.finbrokermgmt.entity;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
@@ -10,18 +12,28 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table
+@Table(name = "userdetails")
 public class UserDetails {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private long userId;
-	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private long id;
+
+	@Column(name = "userId", nullable = false, unique = true)
+	private String userId;
+
+	@Column(name = "userName", nullable = false)
 	private String userName;
+
+	@Column(name="brokerId",nullable=false,insertable=false,updatable = false)
+	private String brokerId;
 	
-	@ManyToOne
-	@JoinColumn(name = "brokerId", foreignKey = @ForeignKey(name="broker_fkey"))
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "brokerId",referencedColumnName = "brokerId",foreignKey = @ForeignKey(name = "user-brokerid-fkey"))
 	private BrokerDetails broker;
 
+	public UserDetails() {}
+	
 	public BrokerDetails getBroker() {
 		return broker;
 	}
@@ -30,11 +42,19 @@ public class UserDetails {
 		this.broker = broker;
 	}
 
-	public long getUserId() {
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(long userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
@@ -45,4 +65,13 @@ public class UserDetails {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+
+	public String getBrokerId() {
+		return brokerId;
+	}
+
+	public void setBrokerId(String brokerId) {
+		this.brokerId = brokerId;
+	}
+	
 }

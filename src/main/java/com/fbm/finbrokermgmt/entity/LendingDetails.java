@@ -2,66 +2,67 @@ package com.fbm.finbrokermgmt.entity;
 
 import java.util.Date;
 
-import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.hibernate.annotations.Formula;
-
 @Entity
+@Table(name = "lendingdetails")
 public class LendingDetails {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "recordid")
 	private long recordId;
-	
-	
+
+	@Column(name = "lender_id", nullable = false, insertable = false, updatable = false)
+	private String lenderId;
 	@ManyToOne
-	@JoinColumn(name = "lender_id", foreignKey = @ForeignKey(name="lender_fkey"))
+	@JoinColumn(name = "lender_id", referencedColumnName = "userId", foreignKey = @ForeignKey(name = "lender_fkey"))
 	private UserDetails lender;
 	
+	@Column(name = "borrower_id", nullable = false, insertable = false, updatable = false)
+	private String borrowerId;
 	@ManyToOne
-	@JoinColumn(name = "borrower_id", foreignKey = @ForeignKey(name="borrower_fkey"))
+	@JoinColumn(name = "borrower_id", referencedColumnName = "userId", foreignKey = @ForeignKey(name = "borrower_fkey"))
 	private UserDetails borrower;
-	
-	
-	
-	/*
+
+	@Column(name = "broker_id", nullable = false, insertable = false, updatable = false)
+	private String brokerId;
 	@ManyToOne
-	@JoinColumns({
-		@JoinColumn(name = "lenderId", foreignKey = @ForeignKey(name="lender_fkey")),
-		@JoinColumn(name = "borrowerId", foreignKey = @ForeignKey(name="borrower_fkey"))
-	})
-	private UserDetails user;
-	*/
-	@ManyToOne
-	@JoinColumn(name = "brokerId", foreignKey = @ForeignKey(name="broker_fkey"))
+	@JoinColumn(name = "broker_id", referencedColumnName = "brokerId", foreignKey = @ForeignKey(name = "broker_fkey"))
 	private BrokerDetails broker;
-	
+
+	@Column(name = "rate", nullable = false,precision = 2)
 	private double rate;
-	
+
+	@Column(name = "amount", nullable = false)
 	private long amount;
-	
-	@Basic
+
 	@Temporal(TemporalType.DATE)
+	@Column(name = "start_date", nullable = false)
 	private Date startDate;
-	
-	@Basic
+
 	@Temporal(TemporalType.DATE)
+	@Column(name = "end_date", nullable = false)
 	private Date endDate;
-	
-	@Formula(value =  "TimeUnit.DAYS.convert(endDate.getTime()-startDate.getTime(), TimeUnit.MILLISECONDS)")
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "booking_date", nullable = false)
+	private Date bookingDate;
+
+	@Column(name = "duration", nullable = false)
 	private long durationInDays;
-	
-	@Formula(value = "amount*rate/100 * (durationInDays/365.0)")
-	private double totalAmount;
+
+	@Column(name = "final_amount", nullable = false,precision = 2)
+	private double finalAmount;
 
 	public long getRecordId() {
 		return recordId;
@@ -119,12 +120,36 @@ public class LendingDetails {
 		this.durationInDays = durationInDays;
 	}
 
-	public double getTotalAmount() {
-		return totalAmount;
+	public UserDetails getLender() {
+		return lender;
 	}
 
-	public void setTotalAmount(double totalAmount) {
-		this.totalAmount = totalAmount;
+	public void setLender(UserDetails lender) {
+		this.lender = lender;
 	}
-	
+
+	public UserDetails getBorrower() {
+		return borrower;
+	}
+
+	public void setBorrower(UserDetails borrower) {
+		this.borrower = borrower;
+	}
+
+	public Date getBookingDate() {
+		return bookingDate;
+	}
+
+	public void setBookingDate(Date bookingDate) {
+		this.bookingDate = bookingDate;
+	}
+
+	public double getFinalAmount() {
+		return finalAmount;
+	}
+
+	public void setFinalAmount(double finalAmount) {
+		this.finalAmount = finalAmount;
+	}
+
 }

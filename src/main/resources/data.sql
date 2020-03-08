@@ -1,28 +1,7 @@
-DROP TABLE IF EXISTS brokerdetails;
+-- data.sql – To insert default data rows.
 
-CREATE TABLE brokerdetails (
-  brokerid INT AUTO_INCREMENT  PRIMARY KEY,
-  brokername VARCHAR(250) NOT NULL
-);
+insert into brokerdetails (id,brokerid, brokername) values(1,'sampat','Sampat Sharma');
 
---insert into brokerdetails ( brokerid, brokername) values(1,'Broker1');
+insert into userdetails (id,userid, brokerid, username) values(1,'gopi','sampat','Gopi');
+insert into userdetails (id,userid, brokerid, username) values(2,'soni','sampat','Soni');
 
-DROP TABLE IF EXISTS userdetails;
-
-CREATE TABLE userdetails (
-	userid INT AUTO_INCREMENT  PRIMARY KEY,  
-	brokerid INT NOT NULL,
-  	username VARCHAR(250) NOT NULL,
-  	FOREIGN KEY (brokerid) REFERENCES brokerdetails(brokerid)
-);
-
---insert into userdetails (userid, brokerid, username) values(1,1,'User1');
-
-DROP TABLE IF EXISTS credentialdetails;
-
-CREATE TABLE credentialdetails (
-	credentialid INT AUTO_INCREMENT  PRIMARY KEY,  
-  	username VARCHAR(250) NOT NULL,
-  	password VARCHAR(250) NOT NULL,
-  	role VARCHAR(250) NOT NULL
-);
