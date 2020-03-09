@@ -1,0 +1,35 @@
+# Financial-Broker-Management
+
+This is a self learning project, build mainly upon Spring Boot. Please refer to project [wiki](https://github.com/gaurravsh/Financial-Broker-Management/wiki) for more details.
+
+Different branches serve different purpose of learning. Check readme of individual branch for more details.
+
+**Objectives achieved under this branch** (these will vary from branch to branch):
+
+1. Write well designed *REST APIs*.
+2. Learn and implement JPA. Don't use a lot of hibernate, because hibernate is just a wrapper around JPA. JPA is forever.
+3. Use H2 database for storing data of *users* and *brokers*.
+
+**Objectives out of scope** :
+
+1. Tried adding navigation panel at side, was failing after several attempts so skipped.
+2. Use of external database is not covered.
+3. Spring Security will be implemented in separate branch.
+
+**Business Scenario** :
+* There are people who have excess of money and can lend money to others to earn some interst, called *lenders*.
+* There are people who need money and are searching for *lenders*, called *borrowers*.
+
+Both of these are called *users*.
+
+* A *broker* takes advantage of this situation and unites these *users*. In return, he gets some brokerage.
+
+If *users* could know about each other, it would eliminate the need of a *broker*.
+Hence, only a *broker* has authority to crack a deal between a *lender* and a *borrower*.
+
+A *broker* would like to keep a track of all the deals he has made so far.
+He also wants to get notified of which deals are going to expire and which *user* is due with amount (interest+principal). 
+
+In a nutshell, this application is built around a *broker* to help him manage his business.
+
+On top of all these people, there is an *admin*, which can be said as a DBA, who grants access to various *brokers* to use this sytem.
