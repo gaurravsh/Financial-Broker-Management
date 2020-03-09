@@ -1,5 +1,8 @@
 package com.fbm.finbrokermgmt.entity;
 
+import java.io.Serializable;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,11 +12,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "userdetails")
-public class UserDetails {
+public class UserDetails implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -699562492372769479L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
@@ -25,15 +34,22 @@ public class UserDetails {
 	@Column(name = "userName", nullable = false)
 	private String userName;
 
-	@Column(name="brokerId",nullable=false,insertable=false,updatable = false)
+	@Column(name = "brokerId", nullable = false, insertable = false, updatable = false)
 	private String brokerId;
-	
+
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "brokerId",referencedColumnName = "brokerId",foreignKey = @ForeignKey(name = "user-brokerid-fkey"))
+	@JoinColumn(name = "brokerId", referencedColumnName = "brokerId", foreignKey = @ForeignKey(name = "user-brokerid-fkey"))
 	private BrokerDetails broker;
 
-	public UserDetails() {}
-	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "borrower")
+	private List<LendingDetails> dealsAsBorrower;
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "lender")
+	private List<LendingDetails> dealsAsLender;
+
+	public UserDetails() {
+	}
+
 	public BrokerDetails getBroker() {
 		return broker;
 	}
@@ -73,5 +89,4 @@ public class UserDetails {
 	public void setBrokerId(String brokerId) {
 		this.brokerId = brokerId;
 	}
-	
 }

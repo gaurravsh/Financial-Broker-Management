@@ -8,4 +8,5 @@ import com.fbm.finbrokermgmt.entity.BrokerDetails;
 @Repository
 public interface BrokerRepo extends JpaRepository<BrokerDetails, Long>{
 	BrokerDetails findByBrokerId(String brokerId);
+	long deleteByBrokerId(String brokerId);
 }

@@ -7,12 +7,12 @@ import java.util.List;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.fbm.finbrokermgmt.bean.FinBrokerService;
+import com.fbm.finbrokermgmt.bean.BrokerService;
 import com.fbm.finbrokermgmt.entity.BrokerDetails;
 
 public class DaoTest {
 	@Autowired
-	FinBrokerService service;
+	BrokerService service;
 	
 	@Test
 	public void checkBrokerIsInserted() {

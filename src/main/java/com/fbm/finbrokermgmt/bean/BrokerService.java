@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
 import org.springframework.stereotype.Service;
@@ -14,14 +13,14 @@ import com.fbm.finbrokermgmt.dao.BrokerRepo;
 import com.fbm.finbrokermgmt.dao.LendingRepo;
 import com.fbm.finbrokermgmt.dao.UserRepo;
 import com.fbm.finbrokermgmt.entity.BrokerDetails;
+import com.fbm.finbrokermgmt.entity.DealSummary;
 import com.fbm.finbrokermgmt.entity.LendingDetails;
 import com.fbm.finbrokermgmt.entity.UserDetails;
 import com.fbm.finbrokermgmt.entity.UserIdAndName;
-import com.fbm.finbrokermgmt.entity.DealSummary;
 import com.fbm.finbrokermgmt.exception.FinBrokerException;
 
 @Service
-public class FinBrokerService {
+public class BrokerService {
 	@Autowired
 	BrokerRepo brokerRepo;
 
@@ -30,6 +29,8 @@ public class FinBrokerService {
 
 	@Autowired
 	LendingRepo lendingRepo;
+	
+	/**Those services those are owned by Broker.*/
 
 	public void preAuthenticate() {
 		PreAuthenticatedAuthenticationToken authentication = new PreAuthenticatedAuthenticationToken("sampat", "",
@@ -37,22 +38,7 @@ public class FinBrokerService {
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 	}
 
-	/** Broker Table Related Functions. */
-	public BrokerDetails addBroker(String brokerId, String brokerName) throws FinBrokerException {
-		try {
-			return brokerRepo.save(new BrokerDetails(brokerId, brokerName));
-		} catch (DataIntegrityViolationException e) {
-			throw new FinBrokerException("BrokerId '" + brokerId + "' already exists.");
-		}
-	}
-
-	public List<BrokerDetails> getAllBrokers() {
-		return brokerRepo.findAll();
-	}
-
-	public void deleteBroker(String brokerId) {
-		brokerRepo.delete(Long.parseLong(brokerId));
-	}
+	
 
 	/**
 	 * User Table Related Functions.
