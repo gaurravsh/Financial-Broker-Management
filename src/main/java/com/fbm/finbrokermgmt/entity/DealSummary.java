@@ -10,4 +10,5 @@ public interface DealSummary {
 	String getBookingDate();
 	String getDurationInDays();
 	String getFinalAmount();
+	String getBrokerId();
 }

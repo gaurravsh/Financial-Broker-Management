@@ -1,12 +1,15 @@
 package com.fbm.finbrokermgmt.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -25,6 +28,12 @@ public class BrokerDetails implements Serializable{
 	
 	@Column(name="brokerName",nullable=false)
 	private String brokerName;
+	
+	@OneToMany(cascade = CascadeType.ALL,mappedBy = "broker")
+	private List<UserDetails> users;
+	
+	@OneToMany(cascade = CascadeType.ALL,mappedBy = "broker")
+	private List<LendingDetails> dealsCracked;
 	
 	public BrokerDetails(String brokerId,String brokerName) {
 		this.brokerId=brokerId;
