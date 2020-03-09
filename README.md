@@ -2,7 +2,7 @@
 
 This is a self learning project, build mainly upon Spring Boot. Please refer to project [wiki](https://github.com/gaurravsh/Financial-Broker-Management/wiki) for more details.
 
-Different branches serve different purpose of learning. Check [wiki](https://github.com/gaurravsh/Financial-Broker-Management/wiki) for more details.
+Different branches serve different purpose of learning. Check readme of individual branch for more details.
 
 **Learning Objectives** :
 
