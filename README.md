@@ -8,6 +8,12 @@ Different branches serve different purpose of learning. Check readme of individu
 
 1. Connect to an external MySQL db, hosted on AWS.
 
+**Objectives yet to achieve**
+
+1. Use encoded password in properties file and then decode it.
+2. Use logging.
+3. Use SSL with establishing connection with AWS/MySQL.
+
 **Learning Objectives** :
 
 1. Write well designed *REST APIs*.
