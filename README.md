@@ -7,12 +7,12 @@ Different branches serve different purpose of learning. Check readme of individu
 **Objectives achieved under this branch (branch #2)** (these will vary from branch to branch):
 
 1. Connect to an external MySQL db, hosted on AWS.
+2. Use encoded password in properties file and then decode it.
 
 **Objectives yet to achieve**
 
-1. Use encoded password in properties file and then decode it.
-2. Use logging.
-3. Use SSL with establishing connection with AWS/MySQL.
+1. Use logging.
+2. Use SSL with establishing connection with AWS/MySQL.
 
 **Learning Objectives** :
 
