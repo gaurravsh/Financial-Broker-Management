@@ -51,11 +51,11 @@ public class BrokerDetails implements Serializable{
 	}
 
 	public String getBrokerId() {
-		return brokerId;
+		return brokerId.toLowerCase();
 	}
 
 	public void setBrokerId(String brokerId) {
-		this.brokerId = brokerId;
+		this.brokerId = brokerId.toLowerCase();
 	}
 
 	public String getBrokerName() {

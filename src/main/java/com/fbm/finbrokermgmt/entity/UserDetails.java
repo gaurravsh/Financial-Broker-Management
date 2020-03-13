@@ -18,9 +18,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "userdetails")
 public class UserDetails implements Serializable{
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -699562492372769479L;
 
 	@Id
@@ -67,11 +65,11 @@ public class UserDetails implements Serializable{
 	}
 
 	public String getUserId() {
-		return userId;
+		return userId.toLowerCase();
 	}
 
 	public void setUserId(String userId) {
-		this.userId = userId;
+		this.userId = userId.toLowerCase();
 	}
 
 	public String getUserName() {
@@ -83,10 +81,10 @@ public class UserDetails implements Serializable{
 	}
 
 	public String getBrokerId() {
-		return brokerId;
+		return brokerId.toLowerCase();
 	}
 
 	public void setBrokerId(String brokerId) {
-		this.brokerId = brokerId;
+		this.brokerId = brokerId.toLowerCase();
 	}
 }

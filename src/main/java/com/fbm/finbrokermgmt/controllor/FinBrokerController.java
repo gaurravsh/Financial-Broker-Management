@@ -6,6 +6,8 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -29,7 +31,8 @@ import com.fbm.finbrokermgmt.exception.FinBrokerException;
 
 @Controller
 public class FinBrokerController {
-
+	public static final Logger logger = LoggerFactory.getLogger(FinBrokerController.class);
+	
 	@Autowired
 	BrokerService brokerService;
 	
