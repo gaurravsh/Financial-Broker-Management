@@ -4,6 +4,16 @@ This is a self learning project, build mainly upon Spring Boot. Please refer to 
 
 Different branches serve different purpose of learning. Check readme of individual branch for more details.
 
+**Objectives achieved under this branch (branch #2)** (these will vary from branch to branch):
+
+1. Connect to an external MySQL db, hosted on AWS.
+2. Use encoded password in properties file and then decode it.
+
+**Objectives yet to achieve**
+
+1. Use logging.
+2. Use SSL with establishing connection with AWS/MySQL.
+
 **Learning Objectives** :
 
 1. Write well designed *REST APIs*.
