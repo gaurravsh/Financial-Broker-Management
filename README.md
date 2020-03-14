@@ -8,11 +8,11 @@ Different branches serve different purpose of learning. Check readme of individu
 
 1. Connect to an external MySQL db, hosted on AWS.
 2. Use encoded password in properties file and then decode it.
+3. Use logging. A few trivial issues remain though.
 
 **Objectives yet to achieve**
 
-1. Use logging.
-2. Use SSL with establishing connection with AWS/MySQL.
+1. Use SSL with establishing connection with AWS/MySQL.
 
 **Learning Objectives** :
 
