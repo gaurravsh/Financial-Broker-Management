@@ -1,0 +1,12 @@
+spring:
+ mvc:
+  view:
+   prefix: /WEB-INF/view/
+   suffix: .jsp
+
+logs-folder: ./logs
+
+#logging:
+# level:
+#  root: INFO
+#debug=true

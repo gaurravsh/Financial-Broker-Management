@@ -1,0 +1,33 @@
+spring:
+ datasource:
+  driverClassName: "com.mysql.jdbc.Driver"
+
+     # This shows warning in red
+  url:jdbc:mysql://database-mysql.cxfbosb7woki.ap-south-1.rds.amazonaws.com:3306/fin-broker
+
+     # This suppresses the warning and I don't think it is recommended 
+     #url=jdbc:mysql://database-mysql.cxfbosb7woki.ap-south-1.rds.amazonaws.com:3306/fin-broker?useSSL=false
+
+     # This makes it mandatory to use SSL
+     #url=jdbc:mysql://database-mysql.cxfbosb7woki.ap-south-1.rds.amazonaws.com:3306/fin-broker?useSSL=true
+
+     # schema=src/main/resources/set-schema.sql
+
+  username : admin
+  initialization-mode : always
+     
+myspring:
+  datasource:
+    encodedpassword: YXdzMTIzNDU2
+
+spring:
+  jpa:
+    hibernate:
+      naming.physical-strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto=none
+
+  show-sql=true
+  properties:
+    hibernate.format_sql=true
+    validator.apply_to_ddl=false
+    # hibernate.check_nullability=true

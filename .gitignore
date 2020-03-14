@@ -1,0 +1,8 @@
+.classpath
+.project
+.settings
+.DS_Store
+README.md
+src/main/resources/db-connection.properties
+/target/
+logs
